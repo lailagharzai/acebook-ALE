@@ -28,7 +28,7 @@ jobs:
       - name: use cache 
         uses: actions/cache@v2
         with:
-          path: "~/.npm"
+          path: "./*"
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           # $GITHUB_RUN_ID 
 
@@ -40,7 +40,7 @@ jobs:
       - name: use cache 
         uses: actions/cache@v2
         with:
-          path: "~/.npm"
+          path: "./*"
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
      
       - name: Run jest
@@ -54,7 +54,7 @@ jobs:
       - name: use cache 
         uses: actions/cache@v2
         with:
-          path: "~/.npm"
+          path: "./*"
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Cypress run
