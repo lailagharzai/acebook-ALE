@@ -29,7 +29,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "/output"
-          key: ${{ runner.os }}-$GITHUB_RUN_ID
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          # $GITHUB_RUN_ID 
 
   jest-run:
     needs: App-setup
@@ -55,7 +56,7 @@ jobs:
         with:
           path: "/output"
           key: ${{ runner.os }}-$GITHUB_RUN_ID
-          
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
