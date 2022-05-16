@@ -25,11 +25,23 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "/output"
+          key: ${{ runner.os }}-$GITHUB_RUN_ID
+
   jest-run:
     needs: App-setup
     runs-on: ubuntu-latest
     
     steps:
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "/output"
+          key: ${{ runner.os }}-$GITHUB_RUN_ID
+     
       - name: Run jest
         run: npm run test:unit
   
@@ -38,6 +50,12 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "/output"
+          key: ${{ runner.os }}-$GITHUB_RUN_ID
+          
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
