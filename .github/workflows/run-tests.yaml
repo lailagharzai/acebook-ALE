@@ -3,14 +3,30 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.1x, 16.x]
+        mongodb-version: ['3.4.1', '4.2', '4.4', '5.0']
+   
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+      
+      - name: Install dependencies
+        run: npm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          # build: npm run build
           start: npm run start:test
           wait-on: http://localhost:3030
