@@ -17,8 +17,7 @@ jobs:
         # with:
         #   node-version: ${{ matrix.node-version }}
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.7.0
+     
         # with:
         #   mongodb-version: ${{ matrix.mongodb-version }}
       
@@ -42,6 +41,9 @@ jobs:
         with:
           path: "./*"
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
      
       - name: Run jest
         run: npm run test:unit
@@ -56,6 +58,9 @@ jobs:
         with:
           path: "./*"
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
