@@ -86,8 +86,7 @@ jobs:
       - name: zip-files
         uses: papeloto/action-zip@v1
         with:
-          files: acebook-ale
-          recursive: false
+          files: .
           dest: app.zip
 
       - name: Configure AWS credentials
