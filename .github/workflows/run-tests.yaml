@@ -100,5 +100,5 @@ jobs:
            --deployment-config-name CodeDeployDefault.OneAtATime \
            --deployment-group-name deploy-acebook-ale \
            --file-exists-behavior OVERWRITE \
-           --s3-location bucket=bucketofale,key=./*.zip,bundleType=zip \
+           --s3-location bucket=bucketofale,bundleType=zip \
     
