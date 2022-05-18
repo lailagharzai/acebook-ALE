@@ -98,7 +98,7 @@ jobs:
           aws deploy create-deployment \
            --application-name ale-acebook \
            --deployment-config-name CodeDeployDefault.OneAtATime \
-           --deployment-group-name deploy-ale-acebook \
+           --deployment-group-name deploy-acebook-ale \
            --file-exists-behavior OVERWRITE \
            --s3-location bucket=bucketofale,key=./*.zip,bundleType=zip \
     
