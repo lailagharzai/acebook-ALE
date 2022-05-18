@@ -83,6 +83,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: zip-files
+        uses: papeloto/action-zip@v1
+        with:
+          files: acebook-ale
+          recursive: false
+          dest: app.zip
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -91,7 +98,7 @@ jobs:
 
       - name: Copy files to the website with the AWS CLI
         run: |
-          aws s3 cp . - | bzip2 --best | aws s3 cp - s3://bucketofale/app.bz2
+          aws s3 sync . s3://bucketofale
       
       - name: AWS Create Deployment
         run: |
@@ -100,6 +107,5 @@ jobs:
            --deployment-config-name CodeDeployDefault.OneAtATime \
            --deployment-group-name deploy-acebook-ale \
            --file-exists-behavior OVERWRITE \
-           --s3-location bucket=bucketofale,key=app.bz2,bundleType=zip \
-
+           --s3-location bucket=bucketofale,key=app.zip,bundleType=zip \
     
