@@ -96,9 +96,9 @@ jobs:
       - name: AWS Create Deployment
         run: |
           aws deploy create-deployment \
-           --application-name acebook-ALE \
+           --application-name ale-acebook \
            --deployment-config-name CodeDeployDefault.OneAtATime \
-           --deployment-group-name deploy-acebook-ale \
+           --deployment-group-name deploy-ale-acebook \
            --file-exists-behavior OVERWRITE \
            --s3-location bucket=bucketofale,key=./*.zip,bundleType=zip \
     
