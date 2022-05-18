@@ -1,79 +1,79 @@
 name: run tests
 on: [push]
 jobs:
-  # App-setup:
-  #   runs-on: ubuntu-latest
+  App-setup:
+    runs-on: ubuntu-latest
    
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  #     - name: Use Node.js
-  #       uses: actions/setup-node@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
       
-  #     - name: Install dependencies
-  #       run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  #     - name: use cache 
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: "./*"
-  #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "./*"
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-  # jest-run:
-  #   needs: App-setup
-  #   runs-on: ubuntu-latest
+  jest-run:
+    needs: App-setup
+    runs-on: ubuntu-latest
     
-  #   steps:
-  #     - name: use cache 
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: "./*"
-  #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    steps:
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "./*"
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-  #     - name: Start MongoDB
-  #       uses: supercharge/mongodb-github-action@1.7.0
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
      
-  #     - name: Run jest
-  #       run: npm run test:unit
+      - name: Run jest
+        run: npm run test:unit
   
-  # cypress-run:
-  #   needs: App-setup
-  #   runs-on: ubuntu-latest
+  cypress-run:
+    needs: App-setup
+    runs-on: ubuntu-latest
    
-  #   steps:
-  #     - name: use cache 
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: "./*"
-  #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    steps:
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "./*"
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-  #     - name: Start MongoDB
-  #       uses: supercharge/mongodb-github-action@1.7.0
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
 
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run start:test
-  #         wait-on: http://localhost:3030
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start:test
+          wait-on: http://localhost:3030
 
-  # lint-run:
-  #   needs: App-setup
-  #   runs-on: ubuntu-latest
+  lint-run:
+    needs: App-setup
+    runs-on: ubuntu-latest
     
-  #   steps:
-  #     - name: use cache 
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: "./*"
-  #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    steps:
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: "./*"
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-  #     - name: Run lint
-  #       run: npm run lint
+      - name: Run lint
+        run: npm run lint
 
   Deploy:
     runs-on: ubuntu-latest
-    # needs: [jest-run, cypress-run, lint-run]
+    needs: [jest-run, cypress-run, lint-run]
 
     permissions:
       id-token: write
