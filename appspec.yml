@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/acebook 
+    destination: /home/ec2-user/acebook
 hooks:
   BeforeInstall:
     - location: bin/scripts/install-dependencies.sh
