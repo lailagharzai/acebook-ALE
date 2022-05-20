@@ -3,20 +3,21 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/acebook
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
 hooks:
-  # BeforeInstall:
-  #   - location: bin/scripts/install-dependencies.sh
-  #     timeout: 300
-  #     runas: root
   AfterInstall:
     - location: bin/scripts/install-dependencies.sh
       timeout: 300
-      runas: root
+      runas: rec2-user
   ApplicationStart:
     - location: bin/scripts/start-server.sh
       timeout: 150
-      runas: root
-  # ApplicationStop:
-  #   - location: scripts/stop_server.sh
-  #     timeout: 300
-  #     runas: root
+      runas: ec2-user
+  ApplicationStop:
+    - location: bin/scripts/stop-server.sh
+      timeout: 300
+      runas: ec2-user
